@@ -1,4 +1,5 @@
 {% extends 'common/parent.html' %}
+{% load static %}
 {% block title %}
 登录
 {% endblock %}
@@ -29,9 +30,9 @@
 	    <div class="line"></div>
 	    <div class="line-text">第三方账号登录</div>
 	    <ul class="second-login">
-	    	<li><a href=""><img src="  images/wxlogin.png "/></a></li>
-	    	<li><a href=""><img src="  images/qqlogin.png "/></a></li>
-	    	<li><a href=""><img src="  images/sinalog.png "/></a></li>
+	    	<li><a href=""><img src="  {% static 'images/wxlogin.png' %} "/></a></li>
+	    	<li><a href=""><img src="  {% static 'images/qqlogin.png' %} "/></a></li>
+	    	<li><a href=""><img src="  {% static 'images/sinalog.png' %} "/></a></li>
 	    </ul>
 	</body>
 {% endblock %}
