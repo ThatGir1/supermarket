@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a737c64c-2212-4a9e-84b5-9578057165e3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/apps/user/forms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/user/helper.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/user/migrations/0001_initial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db/base_model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/user/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/user/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/user/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/reg.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/reg.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,7 +21,7 @@
             <file pinned="false" current-in-tab="true">
               <entry file="file://G:/Python Teacher/08Django/2019-01-20-Django超市项目-用户模块/python03/SpMarket/templates/user/reg.html">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="1050">
+                  <state relative-caret-position="175">
                     <caret line="34" column="46" lean-forward="true" selection-start-line="34" selection-start-column="46" selection-end-line="34" selection-end-column="46" />
                   </state>
                 </provider>
@@ -68,17 +59,17 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="525" />
+          <entry key="html" value="529" />
           <entry key="py" value="1990" />
           <entry key="py@supermarket" value="37" />
-          <entry key="txt" value="153" />
+          <entry key="txt" value="191" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CommandLine" value="37" />
-          <entry key="HTML" value="525" />
-          <entry key="PLAIN_TEXT" value="153" />
+          <entry key="HTML" value="529" />
+          <entry key="PLAIN_TEXT" value="191" />
           <entry key="Python" value="1990" />
         </counts>
       </usages-collector>
@@ -89,11 +80,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/user/reg.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="750">
-              <caret line="33" column="84" lean-forward="true" selection-start-line="33" selection-start-column="84" selection-end-line="33" selection-end-column="84" />
-              <folding>
-                <element signature="n#block#1;n#!!top" />
-              </folding>
+            <state relative-caret-position="930">
+              <caret line="31" column="25" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -280,19 +268,25 @@
       <option name="project" value="LOCAL" />
       <updated>1547952368636</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="建立用户表模块，定义注册视图类，验证注册的forms表单，">
+      <created>1547974941392</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1547974941392</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="694" y="46" width="850" height="882" extended-state="0" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.20328283" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.38203752" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932975" weight="0.28037384" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932975" visible="true" weight="0.2818792" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -303,7 +297,7 @@
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50067025" side_tool="true" weight="0.43221477" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.3283582" />
       <window_info anchor="bottom" id="Python Console" order="12" />
-      <window_info anchor="bottom" id="manage.py@supermarket" order="13" visible="true" weight="0.22563417" />
+      <window_info anchor="bottom" id="manage.py@supermarket" order="13" weight="0.22563417" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -320,7 +314,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="第二次提交" />
     <MESSAGE value="优化了应用：把应用放在一个文件夹中，在setting中设置了包的路径。优化了模板：在父模板分的更细例如：添加专门有js css header footer_js的块。创建了简单的视图类渲染了注册，登录的页面。" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化了应用：把应用放在一个文件夹中，在setting中设置了包的路径。优化了模板：在父模板分的更细例如：添加专门有js css header footer_js的块。创建了简单的视图类渲染了注册，登录的页面。" />
+    <MESSAGE value="建立用户表模块，定义注册视图类，验证注册的forms表单，" />
+    <option name="LAST_COMMIT_MESSAGE" value="建立用户表模块，定义注册视图类，验证注册的forms表单，" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/supermarket/__init__.py">
@@ -474,18 +469,15 @@
     </entry>
     <entry file="file://G:/Python Teacher/08Django/2019-01-20-Django超市项目-用户模块/python03/SpMarket/templates/user/reg.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1050">
+        <state relative-caret-position="175">
           <caret line="34" column="46" lean-forward="true" selection-start-line="34" selection-start-column="46" selection-end-line="34" selection-end-column="46" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/user/reg.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="750">
-          <caret line="33" column="84" lean-forward="true" selection-start-line="33" selection-start-column="84" selection-end-line="33" selection-end-column="84" />
-          <folding>
-            <element signature="n#block#1;n#!!top" />
-          </folding>
+        <state relative-caret-position="930">
+          <caret line="31" column="25" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
         </state>
       </provider>
     </entry>
