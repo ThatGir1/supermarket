@@ -1,5 +1,7 @@
 from django import forms
+from django.core.validators import RegexValidator
 
+from user.helper import set_password
 from user.models import SpUsers
 
 
@@ -41,3 +43,46 @@ class RegisterModelForm(forms.ModelForm):
             raise forms.ValueError({"repassword":"两次密码不一致！"})
         #返回所有清洗后的数据
         return self.cleaned_data
+
+
+
+
+class LoginModelForm(forms.ModelForm):
+    class Meta:
+        model = SpUsers
+        fields = ['tel','password']
+
+        error_messages = {
+            'tel':{
+                'required':'请填写手机号',
+            },
+            'password': {
+                'required': '请填写密码',
+            }
+        }
+
+    def clean(self):
+        # 获取用户名和密码
+        tel = self.cleaned_data.get('tel')
+        password = self.cleaned_data.get('password')
+
+        # 验证
+        # 根据手机号码获取
+        try:
+            user = SpUsers.objects.get(tel=tel)
+        except SpUsers.DoesNotExist:
+            raise forms.ValidationError({'tel': '手机号错误'})
+
+        # 验证密码
+        if user.password != set_password(password):
+            raise forms.ValidationError({'password': '密码填写6错误'})
+
+        # 将用户信息保存到cleaned_data中
+        self.cleaned_data['user'] = user
+        return self.cleaned_data
+
+
+
+
+
+
