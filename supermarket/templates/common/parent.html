@@ -4,7 +4,10 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title> {% block title %} 超市 {% endblock %} </title>
+		<title>
+            {% block title %}
+            超市
+            {% endblock %} </title>
         <meta name="description" content="">
         <meta name="keywords" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -15,9 +18,32 @@
 		<link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" />
 		<script src="{% static 'js/jquery-1.10.2.min.js' %}"></script>
 		<script src="{% static 'js/time.js' %}"></script>
-        {% block header %} {% endblock %}
-	</head>
-    {% block content %}{% endblock %}
-    {% block footer %}{% endblock %}
+        {% block header_css %}
+          {# 写css的地方 #}
+        {% endblock %}
+
+        {% block header_js %}
+          {# 写js的地方 #}
+        {% endblock %}
+
+    </head>
+    <body>
+    {% block header %}
+
+    {% endblock %}
+
+    {% block content %}
+
+    {% endblock %}
+    {% block footer %}
+
+    {% endblock %}
+
+    {% block footer_js %}
+
+    {% endblock %}
+
+    </body>
+
 
 </html>

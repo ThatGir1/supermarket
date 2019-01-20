@@ -3,9 +3,9 @@
 {% block title %}
 主页
 {% endblock %}
-{% block content %}
-<body>
-		<header data-am-widget="header" class="am-header am-header-default sq-head1">
+
+{% block header %}
+<header data-am-widget="header" class="am-header am-header-default sq-head1">
 			<div class="am-header-left am-header-nav">
 		        <a href="city.html" class="" style="color: #fff;">
 			        <img src="{% static 'images/city.png' %}images/city.png" />
@@ -24,6 +24,10 @@
 		        </a>
 			</div>
         </header>
+{% endblock %}
+
+{% block content %}
+
 <div style="height: 49px;"></div>
 <!--图片轮换-->
 <div class="am-slider am-slider-default" data-am-flexslider id="demo-slider-0">
@@ -244,5 +248,4 @@
 
 <script src="js/jquery.min.js"></script>
 <script src="js/amazeui.min.js"></script>
-	</body>
 {% endblock %}
