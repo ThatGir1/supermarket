@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from django.views import View
 
-from user.forms import RegisterModelForm, LoginModelForm
+from user.forms import RegisterModelForm, LoginModelForm,  ForgetModelForm
 from user.models import MarkUser
 
 
@@ -80,5 +80,46 @@ class MemberView(View):
 
 
 
+# class ChangePasswordView(View):
+#     def get(self,request):
+#         return render(request,'user/forgetpassword.html')
+#
+#     def post(self,request):
+#         pass
+#         #接收参数
+#         data=request.POST
+#         Change_form=ChangePasswordModelForm(data)
+#
+#         #操作数据库
+#         #合成响应
 
 
+
+
+
+class ForgetView(View):
+    def get(self,request):
+        return render(request,'user/forgetpassword.html')
+
+    def post(self,request):
+        #获取数据
+        data=request.POST
+        forget_form=ForgetModelForm(data)
+        if forget_form.is_valid():
+
+            tel=ForgetModelForm.cleaned_data.get('tel')
+            password=ForgetModelForm.cleaned_data.get('password')
+            h = hashlib.md5(ForgetModelForm.cleaned_data.get('password').encode('utf-8'))
+
+            user=MarkUser()
+            user.objects.filter(tel=tel).update(password=h.hexdigest())
+            return redirect('user:个人中心')
+            #合法
+            #操作数据库
+
+            # MarkUser.objects.
+            return redirect('user:登录')
+        else:
+            return render(request,'user/forgetpassword.html',{'form':forget_form})
+
+        # return HttpResponse('ko')
