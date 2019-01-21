@@ -1,3 +1,5 @@
+import hashlib
+
 from django import forms
 
 from user.models import MarkUser
@@ -47,6 +49,52 @@ class RegisterModelForm(forms.ModelForm):
         else:
             #返回清洁后的数据
             return self.cleaned_data
+
+
+
+
+class LoginModelForm(forms.ModelForm):
+    class Meta:
+        #关联模型
+        model = MarkUser
+        #需要验证的字段
+        fields=['tel','password']
+        #验证字段是否为空
+        error_messages={
+            'tel':{
+            'required':'请填写手机号'
+            },
+            'password':{
+                'required':'请填写密码'
+            }
+        }
+
+    def clean(self):
+        #获取用户名和密码
+        tel=self.cleaned_data.get('tel')
+        password=self.cleaned_data.get('password')
+        #根据获取数据查询数据库
+        #get获取数据库如果没有会报错，所以加try
+        #查询数据库中tel用户的所有信息
+        try:
+            user=MarkUser.objects.get(tel=tel)
+        except MarkUser.DoesNotExist:
+            raise forms.ValidationError({'tel':'手机号码错误'})
+
+        #验证密码md5正向不可逆所以验证密码必须给获取数据进行编码加密
+        h=hashlib.md5(self.cleaned_data.get('password').encode('utf-8'))
+        if user.password !=h.hexdigest():
+            raise forms.ValidationError({'password':'密码错误'})
+
+        #将用户信息保存到cleaned_data中
+        self.cleaned_data['user']=user
+        return self.cleaned_data
+
+
+
+
+
+
 
 
 

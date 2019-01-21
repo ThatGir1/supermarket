@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from django.views import View
 
-from user.forms import RegisterModelForm
+from user.forms import RegisterModelForm, LoginModelForm
 from user.models import MarkUser
 
 
@@ -33,6 +33,7 @@ class RegisterView(View):
             #对清洁后的密码加密设置编码
             h=hashlib.md5(cleaned_data.get('password').encode('utf-8'))
             user.password=h.hexdigest()
+            user.save()
             return redirect('user:登录')
             # return HttpResponse("合法")
 
@@ -46,8 +47,37 @@ class LoginView(View):
     def get(self,request):
         return  render(request,'user/login.html')
 
-    def post(self):
+    def post(self,request):
+        #接收参数
+        data=request.POST
+        #创建模型对象
+        login_form=LoginModelForm(data)
+        #验证合法性
+        if login_form.is_valid():
+            #从表单中得到清洁后用户信息
+            user=login_form.cleaned_data.get('user')
+            #保存所需信息到seesion中
+            request.session['id'] =user.pk
+            request.session['tel']=user.tel
+
+            return redirect('user:个人中心')
+
+
+            #合法
+            # return  HttpResponse("合法")
+        else:
+            #合成响应
+            return render(request,'user/login.html',{'form':login_form})
+
+
+
+class MemberView(View):
+    def get(self,request):
+        return render(request,'user/member.html')
+
+    def post(self,request):
         pass
+
 
 
 
