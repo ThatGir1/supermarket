@@ -2,6 +2,7 @@ import hashlib
 
 from django import forms
 from django.core.validators import RegexValidator
+from django_redis import get_redis_connection
 
 from user.models import MarkUser
 
@@ -17,6 +18,14 @@ class RegisterModelForm(forms.ModelForm):
                                })  # CharField用于接收文本
     repassword = forms.CharField(error_messages={
         'required': '请确认密码',
+    })
+    captcha=forms.CharField(max_length=6,
+                            error_messages={
+                                'required':'验证码必须填写'
+                            })
+
+    agree =forms.BooleanField(error_messages={
+                                'required':'必须同意用户协议'
     })
 
     class Meta:
@@ -40,6 +49,8 @@ class RegisterModelForm(forms.ModelForm):
         else:
             return tel
 
+
+
     def clean(self):
         # 验证密码是否重复
         # 1.获取两次的密码数据
@@ -47,9 +58,28 @@ class RegisterModelForm(forms.ModelForm):
         pwd1 = self.cleaned_data.get('repassword')
         if pwd and pwd1 and pwd != pwd1:
             raise forms.ValidationError('两次密码不一致')
-        else:
-            # 返回清洁后的数据
-            return self.cleaned_data
+
+
+        #综合校验
+        # 验证用户传入验证码跟redis中的是否一样
+        try:
+            captcha = self.cleaned_data.get('captcha')
+            tel = self.cleaned_data.get('tel', '')
+            # 获取redis中的
+            r = get_redis_connection()
+            random_code = r.get(tel)  # 二进制, 转码
+            random_code = random_code.decode('utf-8')
+            # 比对
+            if captcha and captcha != random_code:
+                raise forms.ValidationError({"captcha": "验证码输入错误!"})
+        except:
+            raise forms.ValidationError({"captcha": "验证码输入错误!"})
+
+        # 返回清洁后的数据
+        return self.cleaned_data
+
+
+
 
 
 class LoginModelForm(forms.ModelForm):
