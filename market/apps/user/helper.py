@@ -3,13 +3,8 @@ import hashlib
 from django.shortcuts import redirect
 
 from aliyunsdkdysmsapi.request.v20170525 import SendSmsRequest
-from aliyunsdkdysmsapi.request.v20170525 import QuerySendDetailsRequest
 from aliyunsdkcore.client import AcsClient
-import uuid
 from aliyunsdkcore.profile import region_provider
-from aliyunsdkcore.http import method_type as MT
-from aliyunsdkcore.http import format_type as FT
-import const
 
 from market.settings import ACCESS_KEY_ID, ACCESS_KEY_SECRET
 

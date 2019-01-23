@@ -14,11 +14,11 @@
 {% block content %}
  <div style="height: 49px;"></div>
 	    <div class="member">
-	    	<div class="mem-tit">15078921546
+	    	<div class="mem-tit">{{request.session.tel}}
 	    		<a href="step.html" class="step"><img src="{% static 'images/step.png' %}" width="26"/></a>
 	    	</div>
 	    	<div class="mem-pic">
-		    	<div class="mem-pic-bg" style="background-image: url(images/memtx.png);"></div>
+		    	<div class="mem-pic-bg" style="background-image: url({{ MEDIA_URL }}{{  request.session.head}});"></div>
 	    	</div>
 	    	<ul class="member-menu">
 			<li>
@@ -60,11 +60,11 @@
 		    	<li><a href="allorder.html"> <img src="{% static 'images/1-icon3.png' %}"> <p>退换货</p></a></li>
 		    </ul>
 		    <div class="u-list-main">
-		  		<img src="images/order-my.png" width="27" />
+		  		<img src=" {% static 'images/order-my.png' %}" width="27" />
 		  		<span>帐户与安全</span>
 		  	</div>
 		    <ul class="user-nav">
-		    	<li><a href="infor.html"> <img src="{% static 'images/1-icon4.png' %}"> <p>个人资料</p></a></li>
+		    	<li><a href="{% url 'user:个人资料' %}"> <img src="{% static 'images/1-icon4.png' %}"> <p>个人资料</p></a></li>
 		    	<li><a href="gladdress.html"> <img src="{% static 'images/1-icon5.png' %}"> <p>收货地址</p></a></li>
 		    	<li><a href="saftystep.html"> <img src="{% static 'images/1-icon6.png' %}"> <p>安全设置</p></a></li>
 		    	<li><a href="money.html"> <img src="{% static 'images/1-icon7.png' %}"> <p>我的钱包</p></a></li>
@@ -146,7 +146,7 @@
 	</div>
 	<div class="dq-text">
 		<a href="http://wpa.qq.com/msgrd?v=3&uin=123456789&site=qq&menu=yes">
-			<img src="images/contactqq.png" width="50" />
+			<img src="{% static 'images/contactqq.png' %}" width="50" />
 			<p class="contactqq">联系QQ</p>
 		</a>
 		<a href="tel:0791-12345678">
@@ -205,8 +205,4 @@
 
 {% endblock %}
 
-{% block footer_js %}
-<script src="{% static 'js/jquery.min.js' %}"></script>
-<script src="{% static 'js/amazeui.min.js' %}"></script>
-{% endblock %}
 

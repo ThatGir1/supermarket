@@ -62,6 +62,11 @@ class MarkUser(BaseModel):
     # update_time = models.DateTimeField(auto_now=True,
     #                                    verbose_name='更新时间')
 
+    # 设置头像字段
+    head = models.ImageField(upload_to="head/%Y%m", default="head/memtx.png", verbose_name="用户头像")
+
+
+
     def __str__(self):
         return self.tel
 

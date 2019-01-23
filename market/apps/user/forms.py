@@ -217,3 +217,12 @@ class ForgetModelForm(forms.ModelForm):
         else:
             # 返回清洁后的数据
             return self.cleaned_data
+
+
+class InfoForm(forms.Form):
+    nickname=forms.CharField(max_length=10,
+                             min_length=3,
+                             error_messages={
+                                 'max_length':'最大昵称长度为10',
+                                 'min_length':'最少起3字以上的昵称',
+                             })

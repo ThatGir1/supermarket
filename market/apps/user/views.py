@@ -9,7 +9,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 
 from db.base_view import VerifyLoginView
-from user.forms import RegisterModelForm, LoginModelForm,  ForgetModelForm
+from user.forms import RegisterModelForm, LoginModelForm, ForgetModelForm, InfoForm
 from user.helper import send_sms
 from user.models import MarkUser
 import re
@@ -65,6 +65,7 @@ class LoginView(View):
             #保存所需信息到seesion中
             request.session['ID'] =user.pk
             request.session['tel']=user.tel
+            request.session['head']=user.head
             #关闭浏览器就消失
             request.session.set_expiry(0)
 
@@ -184,13 +185,76 @@ class SendMsm(View):
 
 
         #接入运营商
-        __business_id = uuid.uuid1()
-        params = "{\"code\":\"%s\",\"product\":\"景一机车服店\"}"% random_code
-        print(send_sms(__business_id,tel, "注册验证", "SMS_2245271", params))
-        print(rs.decode('utf-8'))
+        # __business_id = uuid.uuid1()
+        # params = "{\"code\":\"%s\",\"product\":\"景一机车服店\"}"% random_code
+        # print(send_sms(__business_id,tel, "注册验证", "SMS_2245271", params))
+        # print(rs.decode('utf-8'))
+            # >>>3. 接入运营商
+        # __business_id = uuid.uuid1()
+        # params = "{\"code\":\"%s\",\"product\":\"景一机车服店\"}" % random_code
+        # # print(params)
+        # rs = send_sms(__business_id, tel, "注册验证", "SMS_2245271", params)
 
+        # 接入运营商
+        __business_id = uuid.uuid1()
+        params = "{\"code\":\"%s\",\"product\":\"湖南铁赖瓜子店\"}" % random_code
+        print(send_sms(__business_id, tel, "注册验证", "SMS_2245271", params))
+        # print(rs.decode('utf-8'))
 
         #3.合成响应
         return JsonResponse({'error':0})
+
+
+class InfoView(VerifyLoginView):
+    def get(self, request):
+        # 获取session中的用户id
+        user_id = request.session.get("ID")
+        # 获取用户资料
+        user = MarkUser.objects.get(pk=user_id)
+
+        # 渲染到页面
+        context = {
+            'user': user
+        }
+        return render(request, 'user/infor.html', context=context)
+
+
+    def post(self,request):
+        #接收参数
+        data=request.POST
+        head = request.FILES.get('head')
+        user_id = request.session.get('ID')
+
+        info_form=InfoForm(data)
+        if info_form.is_valid():
+            #合法
+            # 操作数据
+            user = MarkUser.objects.get(pk=user_id)
+            user.nickname=info_form.cleaned_data.get('nickname')
+            user.gender = request.POST.get('gender')
+            user.school_name = request.POST.get('school_name')
+            user.hometown = request.POST.get('hometown')
+            user.address = request.POST.get('address')
+            user.birth_date = request.POST.get('birth_data')
+            if head is not None:
+                user.head=head
+            user.save()
+
+            #同时修改session
+            # 保存所需信息到seesion中
+            request.session['ID'] = user.pk
+            request.session['tel'] = user.tel
+            request.session['head'] = user.head
+            # 关闭浏览器就消失
+            request.session.set_expiry(0)
+
+            return redirect('user:个人资料')
+
+            #操作数据
+
+
+
+
+
 
 
