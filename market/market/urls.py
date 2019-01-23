@@ -20,5 +20,6 @@ from user.views import RegisterView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^user/', include('user.urls',namespace='user'))
+    url(r'^user/', include('user.urls',namespace='user')),
+    url(r'^goods/', include('goods.urls',namespace='goods')),
 ]
