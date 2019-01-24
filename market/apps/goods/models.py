@@ -1,3 +1,4 @@
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
 
 # Create your models here.
@@ -32,8 +33,8 @@ class Goods_Spu(BaseModel):
     """商品Spu表"""
     spu_name = models.CharField(verbose_name='商品SPU名称',
                                 max_length=20, )
-
-    spu_detail = models.TextField(verbose_name='商品详情')
+    #将之前详情修改使用富文本
+    spu_detail = RichTextUploadingField(verbose_name='商品详情')
 
     def __str__(self):
         return self.spu_name

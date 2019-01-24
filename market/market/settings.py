@@ -44,6 +44,10 @@ INSTALLED_APPS = [
     'goods.apps.GoodsConfig',
     'order.apps.OrderConfig',
     'cart.apps.CartConfig',
+    # 添加ckeditor富文本编辑器
+    'ckeditor',
+    # 添加ckeditor富文本编辑器文件上传部件
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -139,6 +143,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static')
 ]
+# 设置静态文件根目录  上线的时候使用
+# STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
 
 #添加django中的缓存配置
 #徐挂起redis服务器，1代表1号数据库
@@ -165,3 +172,11 @@ ACCESS_KEY_SECRET = "FzORQ587PgGBoOAdmxzCjaxQi8klUi"
 MEDIA_URL = "/static/media/"
 # 配置该URL对应的物理目录存储地址
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
+#配置ckeditor 相对  MEDIA_ROOT
+CKEDITOR_UPLOAD_PATH = "uploads/"
+# 编辑器样式配置
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+    },
+}
