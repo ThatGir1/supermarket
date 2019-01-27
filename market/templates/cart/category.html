@@ -23,6 +23,8 @@
             padding-right: 20px;
             font-style: normal;
         }
+
+
     </style>
 {% endblock %}
 
@@ -35,21 +37,24 @@
         </div>
         <form action="{% url 'search:haystack_search' %}" method="get">
             <div class="cate-search">
-                <input type="text" name="q" value="" class="cate-input" placeholder="请输入您要的搜索的产品关键词"/>
+                <input type="text" name="q" value="" class="cate-input" placeholder="{{ query|default:'请输入您要的搜索的产品关键词' }}"/>
                 <input type="submit" value="" class="cate-btn"/>
             </div>
         </form>
     </header>
-    <div style="height: 49px;"></div>
+
 {% endblock %}
 
 
 {% block content %}
+    <div style="height: 49px;"></div>
     <ul class="list-nav">
-        <li {% if order == 0 %}class="current"{% endif %}><a href="{% url 'goods:分类列表' cate_id 0 %}">综合</a></li>
-        <li {% if order == 1 %}class="current"{% endif %}><a href="{% url 'goods:分类列表' cate_id 1 %}">销量</a></li>
-        <li {% if order == 2 or order == 3 %}class="current"{% endif %}><a id="price"  href="{% url 'goods:分类列表' cate_id 2 %}"><i class="list-price">价格</i></a></li>
-        <li {% if order == 4 %}class="current"{% endif %}><a href="{% url 'goods:分类列表' cate_id 4 %}">新品</a></li>
+        <li {% if order == 0 %}
+        class="current"
+        {% endif %}><a href="{% url 'goods:分类列表'  cate_id 0 %}">综合</a></li>
+        <li {% if order == 1 %}class="current"{% endif %}><a href="{% url 'goods:分类列表'  cate_id 1 %}">销量</a></li>
+        <li {% if order == 2 or order == 3 %}class="current"{% endif %}><a id="price"  href="{% url 'goods:分类列表'  cate_id 2 %}"><i  class="list-price">价格</i></a></li>
+        <li {% if order == 4 %}class="current"{% endif %}><a href="{% url 'goods:分类列表'  cate_id 4 %}">新品</a></li>
     </ul>
     <div class="content-list">
         <div class="list-left">
@@ -58,6 +63,8 @@
                     <a href="{% url 'goods:分类列表' category.pk order %}">{{ category.cate_name }}</a>
                 </li>
             {% endfor %}
+
+
         </div>
         <div class="list-right">
             <ul class="list-pro">
@@ -77,19 +84,21 @@
                     <div class="list-cart">
                         <div class="d-stock ">
                             <a class="decrease">-</a>
-                            <input sku_id="{{ goods_sku.pk }}" id="num" readonly="" class="text_box" name="" type="text" value="0">
+                            <input id="num" readonly="" class="text_box" name="" type="text" value="0">
                             <a class="increase">+</a>
                         </div>
                     </div>
                 </li>
-                    {% empty %}
-                    <li>
-                            <a href="{% url 'goods:分类列表' '' '' %}">该分类下商品走丢了~~~~</a>
-                    </li>
+
                 {% endfor %}
+
+
+
+
             </ul>
         </div>
     </div>
+
 {% endblock %}
 
 
@@ -106,6 +115,50 @@
      </div>-->
     </div>
 {% endblock %}
+
+
+{#{% block footer_js %}#}
+{#    <script>#}
+{#        //购物数量加减#}
+{#        $(function () {#}
+{#            $('.increase').click(function () {#}
+{#                var self = $(this);#}
+{#                var current_num = parseInt(self.siblings('input').val());#}
+{#                current_num += 1;#}
+{#                if (current_num > 0) {#}
+{#                    self.siblings(".decrease").fadeIn();#}
+{#                    self.siblings(".text_box").fadeIn();#}
+{#                }#}
+{#                self.siblings('input').val(current_num);#}
+{#                update_item(self.siblings('input').data('item-id'));#}
+{#            })#}
+{#            $('.decrease').click(function () {#}
+{#                var self = $(this);#}
+{#                var current_num = parseInt(self.siblings('input').val());#}
+{#                if (current_num > 0) {#}
+{#                    current_num -= 1;#}
+{#                    if (current_num < 1) {#}
+{#                        self.fadeOut();#}
+{#                        self.siblings(".text_box").fadeOut();#}
+{#                    }#}
+{#                    self.siblings('input').val(current_num);#}
+{#                    update_item(self.siblings('input').data('item-id'));#}
+{#                }#}
+{#            })#}
+{#        })#}
+{##}
+{#        $(function () {#}
+{#            // 修改 标签上的地址值#}
+{#            {% if order == 2 %}#}
+{#                $("#price").attr('href','{% url "goods:分类列表" cate_id 3 %}');#}
+{#            {% elif order == 3 %}#}
+{#                $("#price").attr('href','{% url "goods:分类列表" cate_id 2 %}');#}
+{#            {% endif %}#}
+{#        })#}
+{##}
+{##}
+{#    </script>#}
+{#{% endblock %}#}
 
 
 {% block footer_js %}

@@ -22,10 +22,12 @@ urlpatterns = [
     #添加第三方插件
     # 上传部件自动调用的上传地址
     url(r'^ckeditor/', include("ckeditor_uploader.urls")),
+    # 全文搜索框架
+    url(r'^search/', include('haystack.urls', namespace='search')),
 
     #添加子路由
     url(r'^admin/', admin.site.urls),
     url(r'^user/', include('user.urls',namespace='user')),
     url(r'^goods/', include('goods.urls',namespace='goods')),
-
+    url(r'^cart/', include('cart.urls', namespace='cart')),
 ]

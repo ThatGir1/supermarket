@@ -49,34 +49,69 @@ class RegisterView(View):
             return render(request,'user/reg.html',{'form':register_form})
 
 
+# class LoginView(View):
+#     def get(self,request):
+#         return  render(request,'user/login.html')
+#
+#     def post(self,request):
+#         #接收参数
+#         data=request.POST
+#         #创建模型对象
+#         login_form=LoginModelForm(data)
+#         #验证合法性
+#         if login_form.is_valid():
+#             #从表单中得到清洁后用户信息
+#             user=login_form.cleaned_data.get('user')
+#             #保存所需信息到seesion中
+#             request.session['ID'] =user.pk
+#             request.session['tel']=user.tel
+#             request.session['head']=user.head
+#             #关闭浏览器就消失
+#             request.session.set_expiry(0)
+#
+#             return redirect('user:个人中心')
+#
+#
+#             #合法
+#             # return  HttpResponse("合法")
+#         else:
+#             #合成响应
+#             return render(request,'user/login.html',{'form':login_form})
+
+
 class LoginView(View):
-    def get(self,request):
-        return  render(request,'user/login.html')
+    """登录视图"""
 
-    def post(self,request):
-        #接收参数
-        data=request.POST
-        #创建模型对象
-        login_form=LoginModelForm(data)
-        #验证合法性
+    def get(self, request):
+        return render(request, 'user/login.html')
+
+    def post(self, request):
+        # 获取数据
+        data = request.POST
+        # 验证数据合法性
+        login_form = LoginModelForm(data)
         if login_form.is_valid():
-            #从表单中得到清洁后用户信息
-            user=login_form.cleaned_data.get('user')
-            #保存所需信息到seesion中
-            request.session['ID'] =user.pk
-            request.session['tel']=user.tel
-            request.session['head']=user.head
-            #关闭浏览器就消失
-            request.session.set_expiry(0)
+            # 操作数据库
+            # 保存登录标识到session中, 单独创建一个方法保存, 更新个人资料
+            user = login_form.cleaned_data['user']
+            request.session['ID'] = user.pk
+            request.session['tel'] = user.tel
+            # request.session['head'] = user.head
+            request.session.set_expiry(0) #关闭浏览器就消失
+            # login(request, user)
 
-            return redirect('user:个人中心')
-
-
-            #合法
-            # return  HttpResponse("合法")
+            referer = request.session.get('referer')
+            if referer:
+                # 跳转回去
+                # 删除session
+                del request.session['referer']
+                return redirect(referer)
+            else:
+                # 合成响应, 跳转到个人中心
+                return redirect('user:个人中心')
         else:
-            #合成响应
-            return render(request,'user/login.html',{'form':login_form})
+            return render(request, 'user/login.html', {'form': login_form})
+
 
 
 
